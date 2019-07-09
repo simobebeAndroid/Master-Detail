@@ -1,6 +1,6 @@
-package com.simiomobile.masterdetail.data.repository.local
+package com.simiomobile.masterdetail.data.repository.local.database
 
-import com.simiomobile.masterdetail.data.local.CoinsDao
+import com.simiomobile.masterdetail.data.local.database.CoinsDao
 import com.simiomobile.masterdetail.data.local.model.CoinsData
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -15,7 +15,8 @@ interface CoinsLocalRepository {
     fun deleteAllCoins(): Completable
 }
 
-class CoinsLocalRepositoryImpl(private val coinsDao: CoinsDao) : CoinsLocalRepository {
+class CoinsLocalRepositoryImpl(private val coinsDao: CoinsDao) :
+    CoinsLocalRepository {
     override fun getAllCoins(): Single<List<CoinsData>> {
         return coinsDao.getAllCoins().first(listOf())
     }

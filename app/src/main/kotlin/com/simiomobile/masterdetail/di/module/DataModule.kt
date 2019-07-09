@@ -2,8 +2,10 @@ package com.simiomobile.masterdetail.di.module
 
 import android.arch.persistence.room.Room
 import android.content.Context
-import com.simiomobile.masterdetail.data.local.CoinsDao
-import com.simiomobile.masterdetail.data.local.MasterDetailDatabase
+import com.simiomobile.masterdetail.data.local.database.CoinsDao
+import com.simiomobile.masterdetail.data.local.database.MasterDetailDatabase
+import com.simiomobile.masterdetail.data.local.preference.SharePreferenceImpl
+import com.simiomobile.masterdetail.data.local.preference.SharedPreference
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -32,4 +34,9 @@ class DataModule {
     @Provides
     @Singleton
     fun provideCoinsDao(database: MasterDetailDatabase): CoinsDao = database.coinsDao()
+
+    @Singleton
+    @Provides
+    fun providePreference(context: Context): SharedPreference =
+        SharePreferenceImpl(context)
 }

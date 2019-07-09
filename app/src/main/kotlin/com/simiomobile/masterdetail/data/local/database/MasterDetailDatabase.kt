@@ -1,4 +1,4 @@
-package com.simiomobile.masterdetail.data.local
+package com.simiomobile.masterdetail.data.local.database
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase

@@ -1,11 +1,11 @@
-package com.simiomobile.masterdetail.ui.main
+package com.simiomobile.masterdetail.ui.detail
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import com.simiomobile.masterdetail.data.local.model.CoinsData
 import com.simiomobile.masterdetail.domain.AddFavoriteCoinUseCase
 import com.simiomobile.masterdetail.domain.DeleteFavoriteCoinUseCase
-import com.simiomobile.masterdetail.domain.GetAllCoinsUseCase
+import com.simiomobile.masterdetail.domain.GetCoinsByIdUseCase
 import com.simiomobile.masterdetail.utils.SingleLiveEvent
 import com.simiomobile.masterdetail.utils.extension.addTo
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,15 +13,15 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+class DetailViewModel : ViewModel() {
     @Inject
-    lateinit var getAllCoinsUseCase: GetAllCoinsUseCase
+    lateinit var getCoinsByIdUseCase: GetCoinsByIdUseCase
     @Inject
     lateinit var addFavoriteCoinUseCase: AddFavoriteCoinUseCase
     @Inject
     lateinit var deleteFavoriteCoinUseCase: DeleteFavoriteCoinUseCase
 
-    private val coinsLiveData = SingleLiveEvent<List<CoinsData>>()
+    private val coinLiveData = SingleLiveEvent<CoinsData>()
     private val disposables = CompositeDisposable()
 
     override fun onCleared() {
@@ -29,24 +29,24 @@ class MainViewModel : ViewModel() {
         disposables.clear()
     }
 
-    private fun getAllCoins() {
-        getAllCoinsUseCase.execute()
+    private fun getCoinDetail(coinId: String) {
+        getCoinsByIdUseCase.execute(coinId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { response ->
-                    coinsLiveData.value = response
+                    coinLiveData.value = response
                 },
                 {
-                    coinsLiveData.value = null
+                    coinLiveData.value = null
                 }
             ).addTo(disposables)
 
     }
 
-    fun getListCoins(): LiveData<List<CoinsData>> {
-        getAllCoins()
-        return coinsLiveData
+    fun getCoins(coinId: String): LiveData<CoinsData> {
+        getCoinDetail(coinId)
+        return coinLiveData
     }
 
     fun addFavoriteCoins(coinsData: CoinsData) {

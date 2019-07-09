@@ -19,13 +19,13 @@ data class CoinsData(
     var image: String = "",
 
     @ColumnInfo(name = "current_price")
-    var currentPrice: Long = 0L,
+    var currentPrice: Double = 0.0,
 
     @ColumnInfo(name = "market_cap")
-    var marketCap: String = "",
+    var marketCap: Double = 0.0,
 
     @ColumnInfo(name = "market_cap_rank")
-    var marketCapRank: String = "",
+    var marketCapRank: Int = 0,
 
     @ColumnInfo(name = "high_24h")
     var high24h: String = "",

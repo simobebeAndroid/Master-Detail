@@ -24,9 +24,9 @@ data class CoinsItem(
     @field:SerializedName("low_24h")
     val low24h: Double? = null,
     @field:SerializedName("market_cap")
-    val marketCap: Int? = null,
+    val marketCap: Double? = null,
     @field:SerializedName("market_cap_change_24h")
-    val marketCapChange24h: Int? = null,
+    val marketCapChange24h: Double? = null,
     @field:SerializedName("market_cap_change_percentage_24h")
     val marketCapChangePercentage24h: Double? = null,
     @field:SerializedName("market_cap_rank")
@@ -42,7 +42,7 @@ data class CoinsItem(
     @field:SerializedName("total_supply")
     val totalSupply: Double? = null,
     @field:SerializedName("total_volume")
-    val totalVolume: Int? = null,
-    @field:SerializedName("lastUpdated")
+    val totalVolume: Double? = null,
+    @field:SerializedName("last_updated")
     val lastUpdated: String? = null
 )

@@ -1,6 +1,7 @@
 package com.simiomobile.masterdetail.di.component
 
 import com.simiomobile.masterdetail.di.module.*
+import com.simiomobile.masterdetail.ui.detail.DetailViewModel
 import com.simiomobile.masterdetail.ui.main.MainViewModel
 import dagger.Component
 import javax.inject.Singleton
@@ -14,5 +15,6 @@ import javax.inject.Singleton
         UseCaseModule::class]
 )
 interface AppComponent {
-    fun inject(mainViewModel: MainViewModel)
+    fun inject(viewModel: MainViewModel)
+    fun inject(viewModel: DetailViewModel)
 }

@@ -1,6 +1,5 @@
 package com.simiomobile.masterdetail.ui.main
 
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +8,13 @@ import com.bumptech.glide.Glide
 import com.simiomobile.masterdetail.R
 import com.simiomobile.masterdetail.data.local.model.CoinsData
 import com.simiomobile.masterdetail.utils.extension.currencyFormat
+import com.simiomobile.masterdetail.utils.extension.setOnAnimateClickListener
 import kotlinx.android.synthetic.main.item_coins.view.*
 import kotlin.properties.Delegates
 
 interface ListCoinsItemListener {
     fun onItemSelected(item: CoinsData)
+    fun onItemFavorite(item: CoinsData)
 }
 
 class ListCoinsAdapter(private val listener: ListCoinsItemListener) :
@@ -29,6 +30,12 @@ class ListCoinsAdapter(private val listener: ListCoinsItemListener) :
             parent, false
         )
         val viewHolder = ViewHolder(view)
+        viewHolder.itemView.iconFavoriteImageView.setOnAnimateClickListener {
+            if (viewHolder.adapterPosition != RecyclerView.NO_POSITION) {
+                refreshStatusFavorite(viewHolder.adapterPosition)
+                listener.onItemFavorite(listCoins[viewHolder.adapterPosition])
+            }
+        }
         viewHolder.itemView.setOnClickListener {
             if (viewHolder.adapterPosition != RecyclerView.NO_POSITION) {
                 listener.onItemSelected(listCoins[viewHolder.adapterPosition])
@@ -45,23 +52,19 @@ class ListCoinsAdapter(private val listener: ListCoinsItemListener) :
         holder.bind(listCoins[position])
     }
 
+    private fun refreshStatusFavorite(position: Int) {
+        listCoins[position].isFavorite = !listCoins[position].isFavorite
+        notifyItemChanged(position)
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: CoinsData) = itemView.apply {
-            rankCoinTextView.text = item.marketCapRank
+            rankCoinTextView.text = item.marketCapRank.toString()
             Glide.with(iconCoinImageView)
                 .load(item.image)
                 .into(iconCoinImageView)
             nameCoinTextView.text = item.name
-            priceCoinTextView.apply {
-                text = item.currentPrice.currencyFormat()
-                val textColor = if (item.currentPrice >= 0) {
-                    ContextCompat.getColor(itemView.context, R.color.green)
-                } else {
-                    ContextCompat.getColor(itemView.context, R.color.red)
-                }
-                setTextColor(textColor)
-            }
+            priceCoinTextView.text = item.currentPrice.currencyFormat()
             val imgFavorite = if (item.isFavorite) {
                 R.drawable.ic_favorite
             } else {

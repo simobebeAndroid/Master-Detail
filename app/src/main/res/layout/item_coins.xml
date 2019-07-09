@@ -5,41 +5,74 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/rootLayout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        card_view:cardCornerRadius="4dp"
-        card_view:cardElevation="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="4dp"
         card_view:cardUseCompatPadding="true">
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
 
         <TextView
-                android:id="@+id/priceCoinTextView"
+                android:id="@+id/rankCoinTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:singleLine="true"
-                tools:text="34.04"
-                card_view:layout_constraintEnd_toStartOf="@+id/iconFavoriteImageView"
-                card_view:layout_constraintTop_toTopOf="@+id/iconFavoriteImageView"
-                card_view:layout_constraintBottom_toBottomOf="@+id/iconFavoriteImageView"/>
+                android:textSize="16sp"
+                android:textColor="@color/default_black"
+                android:gravity="center"
+                android:ems="2"
+                tools:text="1"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="@+id/iconCoinImageView"
+                card_view:layout_constraintBottom_toBottomOf="@+id/iconCoinImageView"/>
+
+        <ImageView
+                android:id="@+id/iconCoinImageView"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="fitCenter"
+                card_view:layout_constraintStart_toEndOf="@+id/rankCoinTextView"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
                 android:id="@+id/nameCoinTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:ellipsize="end"
                 android:gravity="start"
                 android:singleLine="true"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/default_black"
                 tools:text="BitCoin"
                 card_view:layout_constraintStart_toEndOf="@+id/iconCoinImageView"
                 card_view:layout_constraintEnd_toStartOf="@+id/priceCoinTextView"
                 card_view:layout_constraintTop_toTopOf="@+id/iconCoinImageView"
                 card_view:layout_constraintBottom_toBottomOf="@+id/iconCoinImageView"/>
+
+        <TextView
+                android:id="@+id/priceCoinTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="16sp"
+                android:textColor="@color/green"
+                tools:text="34.04"
+                card_view:layout_constraintEnd_toStartOf="@+id/iconFavoriteImageView"
+                card_view:layout_constraintTop_toTopOf="@+id/iconFavoriteImageView"
+                card_view:layout_constraintBottom_toBottomOf="@+id/iconFavoriteImageView"/>
 
         <ImageView
                 android:id="@+id/iconFavoriteImageView"
@@ -48,28 +81,6 @@
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
                 card_view:layout_constraintBottom_toBottomOf="parent"/>
-
-
-        <ImageView
-                android:id="@+id/iconCoinImageView"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                card_view:layout_constraintStart_toEndOf="@+id/rankCoinTextView"
-                card_view:layout_constraintTop_toTopOf="parent"
-                card_view:layout_constraintBottom_toBottomOf="parent"/>
-
-
-        <TextView
-                android:id="@+id/rankCoinTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/default_black"
-                tools:text="1"
-                card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toTopOf="@+id/iconCoinImageView"
-                card_view:layout_constraintBottom_toBottomOf="@+id/iconCoinImageView"/>
 
     </android.support.constraint.ConstraintLayout>
 
